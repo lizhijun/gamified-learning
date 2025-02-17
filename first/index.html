@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诗人雅集</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 水墨画背景 -->
+        <div class="scroll-bg">
+            <!-- 三位诗人的场景区域 -->
+            <div class="scene" id="fan-scene">
+                <div class="poet-area">
+                    <img src="images/fan-chengda.png" class="poet-image" id="fan" alt="范成大">
+                    <div class="scene-elements">
+                        <div class="rice-field"></div>
+                        <div class="farm-tools"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scene" id="yang-scene">
+                <div class="poet-area">
+                    <img src="images/yang-wanli.png" class="poet-image" id="yang" alt="杨万里">
+                    <div class="scene-elements">
+                        <div class="plum-tree"></div>
+                        <div class="ice-crystal"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scene" id="lei-scene">
+                <div class="poet-area">
+                    <img src="images/lei-zhen.png" class="poet-image" id="lei" alt="雷震">
+                    <div class="scene-elements">
+                        <div class="ox"></div>
+                        <div class="flute"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 对话框 -->
+        <div class="dialog-box" id="dialog">
+            <div class="dialog-content"></div>
+            <div class="dialog-next">点击继续...</div>
+        </div>
+
+        <!-- 诗句展示 -->
+        <div class="poem-display" id="poem">
+            <div class="poem-text"></div>
+            <div class="poem-pinyin"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

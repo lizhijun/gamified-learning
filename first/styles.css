@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'XiaoLai';
+    src: url('fonts/XiaoLai.ttf') format('truetype');
+}
+
+body {
+    font-family: "XiaoLai", "楷体", "宋体", sans-serif;
+    background: #f5f5f5;
+    color: #333;
+}
+
+.game-container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: url('images/paper-texture.jpg') repeat;
+}
+
+.scroll-bg {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(230, 230, 230, 0.9),
+        rgba(255, 255, 255, 0.7),
+        rgba(230, 230, 230, 0.9)
+    );
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.scene {
+    width: 30%;
+    height: 80%;
+    position: relative;
+    border: 3px solid #8B4513;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.scene::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('images/rice-paper.png') repeat;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.scene:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.2);
+}
+
+.poet-area {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.poet-image {
+    width: 200px;
+    height: auto;
+    position: absolute;
+    bottom: 20%;
+    transition: all 0.4s ease;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.poet-image:hover {
+    transform: translateY(-10px);
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3));
+}
+
+.dialog-box {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #8B4513;
+    border-radius: 8px;
+    padding: 25px;
+    display: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    background-image: 
+        linear-gradient(90deg, rgba(139, 69, 19, 0.1) 1px, transparent 1px),
+        linear-gradient(rgba(139, 69, 19, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.dialog-content {
+    font-size: 1.3em;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+.dialog-next {
+    text-align: right;
+    color: #8B4513;
+    font-size: 0.9em;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.dialog-next:hover {
+    opacity: 1;
+}
+
+.poem-display {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #8B4513;
+    border-radius: 8px;
+    padding: 30px;
+    display: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    background-image: 
+        linear-gradient(90deg, rgba(139, 69, 19, 0.1) 1px, transparent 1px),
+        linear-gradient(rgba(139, 69, 19, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.poem-text {
+    font-size: 1.8em;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.8;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    letter-spacing: 2px;
+    color: #000;
+}
+
+.poem-pinyin {
+    font-size: 1.1em;
+    text-align: center;
+    color: #666;
+    letter-spacing: 1px;
+}
+
+.scene-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+/* 场景元素动画 */
+.rice-field {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: url('images/rice-field.png') repeat-x bottom;
+    animation: sway 8s ease-in-out infinite;
+}
+
+.plum-tree {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 100px;
+    height: 150px;
+    background: url('images/plum-tree.png') no-repeat;
+    animation: gentleBreeze 5s ease-in-out infinite;
+}
+
+.ox {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    width: 80px;
+    height: 60px;
+    background: url('images/ox.png') no-repeat;
+    animation: walk 10s linear infinite;
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(1deg); }
+    50% { transform: rotate(-1deg); }
+}
+
+@keyframes gentleBreeze {
+    0%, 100% { transform: rotate(2deg); }
+    50% { transform: rotate(-2deg); }
+}
+
+@keyframes walk {
+    0% { transform: translateX(-20px); }
+    50% { transform: translateX(20px); }
+    100% { transform: translateX(-20px); }
+}
+
+/* 水墨效果 */
+.scene::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(0, 0, 0, 0.05) 0%,
+            transparent 60%
+        );
+    pointer-events: none;
+} 
