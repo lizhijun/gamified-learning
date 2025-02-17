@@ -1,0 +1,375 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', sans-serif;
+    background: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.game-header {
+    padding: 15px;
+}
+
+.level-info {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.level-info h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #4a90e2, #357abd);
+    transition: width 0.3s ease;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: space-around;
+    font-size: 18px;
+    color: #666;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+.card {
+    position: relative;
+    padding-bottom: 140%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: cardAppear 0.3s ease-out forwards;
+    animation-delay: calc(var(--card-index) * 0.05s);
+}
+
+.card-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.card-text {
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+}
+
+.card-poet {
+    font-size: 14px;
+    color: #666;
+    margin-top: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.card-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 30% 20%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.card.selected .card-content {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    transform: scale(0.95);
+    box-shadow: 0 0 0 3px #4a90e2;
+}
+
+.card.matched .card-content {
+    animation: matchSuccess 0.5s forwards;
+    background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+}
+
+.card:hover .card-content {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+.btn-icon {
+    font-size: 20px;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.9) translateY(-10px);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+    }
+}
+
+/* 添加更多动画效果 */
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* 添加新动画 */
+@keyframes matchSuccess {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1) rotate(5deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0) rotate(15deg);
+    }
+}
+
+@keyframes floatIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 优化移动端显示 */
+@media (max-width: 600px) {
+    .game-board {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .card {
+        padding-bottom: 150%;
+    }
+
+    .card-text {
+        font-size: 16px;
+    }
+
+    .card-poet {
+        font-size: 12px;
+    }
+
+    .control-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+/* 添加深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #1a1a1a;
+    }
+
+    .game-container {
+        background: #2d2d2d;
+    }
+
+    .card-content {
+        background: linear-gradient(135deg, #333 0%, #2d2d2d 100%);
+        border-color: #444;
+    }
+
+    .card-text {
+        color: #fff;
+    }
+
+    .card-poet {
+        color: #aaa;
+    }
+
+    .progress-bar {
+        background: #444;
+    }
+}
+
+/* 导引弹窗样式 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.tutorial-steps {
+    margin: 20px 0;
+}
+
+.step {
+    margin-bottom: 20px;
+}
+
+.step h3 {
+    color: #4a90e2;
+    margin-bottom: 10px;
+}
+
+.step p {
+    margin: 5px 0;
+    color: #666;
+}
+
+#startGameBtn {
+    display: block;
+    width: 200px;
+    margin: 20px auto 0;
+    padding: 15px 30px;
+    font-size: 18px;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#startGameBtn:hover {
+    background: #357abd;
+}
+
+/* 添加粒子效果容器 */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* 针对较长诗句的特殊处理 */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+} 

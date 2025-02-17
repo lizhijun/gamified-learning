@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诗牌寻踪 - 诗词消消乐</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="particles-container"></div>
+    <div class="game-container">
+        <div class="game-header">
+            <div class="level-info">
+                <h2>第1关</h2>
+                <div class="progress-bar">
+                    <div class="progress" id="levelProgress"></div>
+                </div>
+            </div>
+            <div class="game-stats">
+                <div class="score">分数: <span id="score">0</span></div>
+                <div class="moves">步数: <span id="moves">20</span></div>
+            </div>
+        </div>
+
+        <div class="game-board" id="gameBoard">
+            <!-- 卡牌网格将通过JavaScript动态生成 -->
+        </div>
+
+        <div class="game-controls">
+            <button id="shuffleBtn" class="control-btn">
+                <span class="btn-icon">🔄</span>
+                重排
+            </button>
+            <button id="hintBtn" class="control-btn">
+                <span class="btn-icon">💡</span>
+                提示
+            </button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html> 
